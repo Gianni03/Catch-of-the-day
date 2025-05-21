@@ -1,13 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
-import StorePicker from './components/StorePicker';
-import App from './components/App';
+import Router from './components/Router';
 // Import the CSS styles
 import './css/style.css';
 
 
 // Render the StorePicker component into the DOM
 render(
-  <App />,
+  <Router />,
   document.querySelector('#main')
 );
