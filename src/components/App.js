@@ -16,10 +16,22 @@ class App extends React.Component {
 
   componentDidMount() {
     const { params } = this.props.match;
+    const localStorageRef = localStorage.getItem(params.storeId);
+    if (localStorageRef) {
+      this.setState({
+        order: JSON.parse(localStorageRef),
+      });
+    }
+    // this is the firebase reference
+    // base es una instancia de re-base que se conecta a la base de datos de firebase
     this.ref = base.syncState(`${params.storeId}/fishes`, {
       context: this,
       state: 'fishes',
     });
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem(this.props.match.params.storeId, JSON.stringify(this.state.order));
   }
 
   componentWillUnmount() {
@@ -61,7 +73,7 @@ class App extends React.Component {
             ))}
           </ul>
         </div>
-        <Order {...this.state}/>
+        <Order {...this.state} />
         <Inventory
           addFish={this.addFish}
           loadSampleFishes={this.loadSampleFishes}
