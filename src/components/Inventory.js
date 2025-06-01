@@ -2,9 +2,9 @@ import React from "react";
 import AddFishorm from "./AddFishForm";
 import EditFishForm from "./EditFishForm";
 import PropTypes from "prop-types";
-import Login from "./Login";
-import firebase from "firebase";
-import base, { firebaseApp } from "../base";
+/* import Login from "./Login"; */
+/* import firebase from "firebase";
+import base, { firebaseApp } from "../base"; */
 
 class Inventory extends React.Component {
   static propTypes = {
@@ -15,7 +15,7 @@ class Inventory extends React.Component {
     loadSampleFishes: PropTypes.func.isRequired
   }
 
-  state = {
+/*   state = {
     uid: null,
     owner: null
   }
@@ -51,32 +51,32 @@ class Inventory extends React.Component {
       .catch(error => {
         console.error('Error during authentication:', error);
       });
-  }
-  logout = async () => {
+  } */
+ /*  logout = async () => {
     await firebase.auth().signOut();
     this.setState({ uid: null });
-  }
+  } */
   render() {
-    const logout = <button onClick={this.logout}>Log Out</button>;
+    /* const logout = <button onClick={this.logout}>Log Out</button>; */
 
-    // 1 check if they are logged in
-    if (!this.state.uid) {
-      return <Login authenticate={this.authenticate} />;
-    }
-    // 2 check if they are not the owner of the store
-    if (this.state.uid !== this.state.owner) {
-      return (
-        <div>
-          <p>Sorry, you are not the owner of this store.</p>
-          {logout}
-        </div>
-      );
-    }
+    /*  // 1 check if they are logged in
+     if (!this.state.uid) {
+       return <Login authenticate={this.authenticate} />;
+     }
+     // 2 check if they are not the owner of the store
+     if (this.state.uid !== this.state.owner) {
+       return (
+         <div>
+           <p>Sorry, you are not the owner of this store.</p>
+           {logout}
+         </div>
+       );
+     } */
     // 3 they must be the owner, show the inventory
     return (
       <div className="inventory">
         <h2>Inventory</h2>
-        {logout}
+        {/* {logout} */}
         {Object.keys(this.props.fishes).map(key => <EditFishForm key={key} index={key} fish={this.props.fishes[key]} updateFish={this.props.updateFish} deleteFish={this.props.deleteFish} />)}
         <AddFishorm addFish={this.props.addFish} />
         <button onClick={this.props.loadSampleFishes}>Load Sample Fishes</button>
